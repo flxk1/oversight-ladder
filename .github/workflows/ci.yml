@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 flxk1
+name: ci
+on:
+  push:
+    branches-ignore:
+      - 'release-please--**'
+  pull_request:
+
+jobs:
+  reuse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+      - name: REUSE / SPDX licensing compliance
+        uses: fsfe/reuse-action@ef1dfe28dda4d13f5d580f0444eb27dda9746e9b  # v5
+
+  tests:
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.14"]
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout oversight-ladder
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+        with:
+          path: oversight-ladder
+      # A local-only, no-pin, no-vendoring consumer by design (src/oversight_ladder/
+      # _paths.py): it reads loomground-governance's standard/ vocabulary and
+      # loomground-escalation's src/, and validates against loomground-ref, all off
+      # a sibling `loomground-repos/` checkout (OVERSIGHT_LADDER_LOOMGROUND_REPOS
+      # overrides the path if this layout ever changes).
+      - name: checkout loomground-governance (standard/ vocabulary, on-disk)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+        with:
+          repository: flxk1/loomground-governance
+          ref: 270e11d0bbded46c810b2fe56559323d6dcd969a
+          path: loomground-repos/loomground-governance
+      - name: checkout loomground-escalation (src/, on-disk)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+        with:
+          repository: flxk1/loomground-escalation
+          ref: 82c3e05f2241383e210e5621591c9072b894232f
+          path: loomground-repos/loomground-escalation
+      - name: checkout loomground-ref (conformance/validation engine, on-disk)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+        with:
+          repository: flxk1/loomground-ref
+          ref: adcc44a36b10913d167772bca4e7a0dea35f58a0
+          path: loomground-repos/loomground-ref
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      # loomground-escalation's on-disk src imports governance/solver/deontic
+      # at runtime; none are on PyPI, so --no-deps (their own declared version
+      # ranges aren't resolvable from a bare install).
+      - name: install oversight-ladder + the transitive plane packages
+        run: |
+          python3 -m pip install "./oversight-ladder[dev]"
+          python3 -m pip install --no-deps "git+https://github.com/flxk1/loomground-governance.git@270e11d0bbded46c810b2fe56559323d6dcd969a"
+          python3 -m pip install --no-deps "git+https://github.com/flxk1/loomground-solver.git@5f674da3dab5a0763d4cb61bae576797ebd5f788"
+          python3 -m pip install --no-deps "git+https://github.com/flxk1/loomground-deontic.git@35f8eabdc533b275a086b20c8d7a161f4acc46a8"
+      - name: test
+        working-directory: oversight-ladder
+        run: python3 -m pytest -q
+
+  commit-discipline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+        with:
+          fetch-depth: 0
+      - name: commit discipline (new commits only)
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch -q origin ${{ github.base_ref }}
+            range="origin/${{ github.base_ref }}..HEAD"
+          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ] \
+               && git cat-file -e "${{ github.event.before }}" 2>/dev/null; then
+            range="${{ github.event.before }}..${{ github.sha }}"
+          else
+            range="${{ github.sha }} -1"
+          fi
+          bad=0
+          git log --no-merges --format='%s' $range | awk 'length($0)>72 {print "subject >72 chars: " $0; bad=1} END {exit bad}' || bad=1
+          if git log --no-merges --format='%(trailers)' $range | grep -iE '^Co-Authored-By:.*(claude|codex|openai|anthropic|copilot|gemini)'; then
+            echo "AI co-author trailer found — use the assisted line instead"; bad=1
+          fi
+          exit $bad

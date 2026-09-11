@@ -1,8 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "oversight-ladder"
 version = "0.1.0"
 description = "Human-oversight obligations keyed to loomground's L0-L6 autonomy ladder."
+readme = "README.md"
 requires-python = ">=3.10"
+license = "Apache-2.0"
+authors = [{ name = "flxk1" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

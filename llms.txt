@@ -6,13 +6,10 @@
 An autonomy grade (L0-L6) says how much a system may do unattended; it does not say what a human overseer is owed at that grade. oversight-ladder reads the ladder and the ceiling calculus from loomground read-only and adds the missing layer: one `.lg` obligation declaration per rung, and a table mapping a rung (or an escalation result) to its obligation, its AI Act Art. 14 grounding, and the oversight-certificate facets it should satisfy when exercised. It mints no ladder of its own.
 
 ## Install
-This repo is not yet packaged for `pip install` — its `pyproject.toml` declares no `[build-system]`, and it resolves the ladder and the ceiling calculus by reading a sibling `loomground-repos/` checkout on disk at runtime rather than by declaring them as installable dependencies. Use it in place:
 ```
-git clone https://github.com/flxk1/oversight-ladder.git
-# clone or keep loomground-repos/ (loomground-governance, loomground-escalation, loomground-ref)
-# as its sibling directory, or set OVERSIGHT_LADDER_LOOMGROUND_REPOS to its path
+pip install "oversight-ladder @ git+https://github.com/flxk1/oversight-ladder@<tag-at-publish>"
 ```
-Import name `oversight_ladder`, importable once `src/` is on `PYTHONPATH` (see `tests/conftest.py` for the pattern). Requires `loomground_solver` importable (loomground-escalation's one dependency).
+The package builds and installs standalone; the ladder and the ceiling calculus are resolved at runtime by reading a sibling `loomground-repos/` checkout on disk (loomground-governance, loomground-escalation, loomground-ref) rather than as installable dependencies. Clone or keep that checkout as this repo's sibling directory, or set `OVERSIGHT_LADDER_LOOMGROUND_REPOS` to its path. Requires `loomground_solver` importable (loomground-escalation's one dependency).
 
 ## Usage
 ```python

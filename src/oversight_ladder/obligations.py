@@ -36,11 +36,10 @@ CERTIFICATE_FACETS: Tuple[str, ...] = (
     "considered-record",
 )
 
-# adopted: loomground names no L1/L4 meaning of its own and
-# RVND's action_gate.py/test_autonomy_ladder_iso.py name only L0/L2/L3/L5/L6
-# (see grounding strings below) — L1 and L4's meanings are this layer's own
-# ratified-but-refinable working adoption (contract, "Ratified decisions").
-_REFINABLE = frozenset({"L1", "L4"})
+# loomground names no L1/L4 meaning of its own, and RVND's
+# action_gate.py/test_autonomy_ladder_iso.py name only L0/L2/L3/L5/L6 (see
+# grounding strings below) — L1 and L4's meanings are this layer's own
+# ratified working adoption (contract, "Ratified decisions").
 
 
 @dataclass(frozen=True)

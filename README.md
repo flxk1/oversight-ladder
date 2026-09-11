@@ -13,9 +13,8 @@ either plane.
 
 All seven rungs are adopted. L1 and L4 carry no RVND-authoritative meaning
 (RVND's `action_gate.py` names L0/L2/L3/L5/L6, not L1/L4) — their meanings
-here are this layer's own ratified-but-refinable working adoption, per the
-human's direct decisions. They are marked accordingly, not as
-`[CANDIDATE — needs ratification]`.
+here are this layer's own ratified working adoption, per the human's direct
+decisions. They are marked `adopted`, not `[CANDIDATE — needs ratification]`.
 
 | Rung | Label | Status | Art. 14 measure | Obligation (summary) | `.lg` |
 |---|---|---|---|---|---|
@@ -118,7 +117,7 @@ below); legal compliance is a matter of law and policy, outside this repo.
 - the per-rung `.lg` patches (`lg/*.lg`) mapping each rung to loomground
   declarations;
 - the AI Act Art. 14(4) letter mapping and the working meanings for L1/L4
-  (ratified, marked refinable);
+  (ratified, marked adopted);
 - `obligations.py`'s rung table, `escalation_bridge.py`'s wiring from a
   ceiling to an obligation, `biometric.py`'s add-on metadata, and
   `validator.py`'s dual-engine wrapper;
@@ -150,7 +149,7 @@ under `Projects/`); override with `OVERSIGHT_LADDER_LOOMGROUND_REPOS` if it
 lives elsewhere. Requires `loomground_solver` importable (loomground-
 escalation's one dependency) — already installed in this environment.
 
-41 tests, last run: all passing. Coverage:
+41 tests, all passing. Coverage:
 - `test_ladder_tokens.py` — ladder read from grades.json, not hardcoded;
 - `test_lg_compiles.py` — every rung + the add-on compiles WELL-FORMED
   (loomground-ref for all eight; the skill's cached engine for L0-L4 + the

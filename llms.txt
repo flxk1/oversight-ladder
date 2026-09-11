@@ -7,7 +7,7 @@ An autonomy grade (L0-L6) says how much a system may do unattended; it does not 
 
 ## Install
 ```
-pip install "oversight-ladder @ git+https://github.com/flxk1/oversight-ladder@<tag-at-publish>"
+pip install "oversight-ladder @ git+https://github.com/flxk1/oversight-ladder@v0.1.0"
 ```
 The package builds and installs standalone; the ladder and the ceiling calculus are resolved at runtime by reading a sibling `loomground-repos/` checkout on disk (loomground-governance, loomground-escalation, loomground-ref) rather than as installable dependencies. Clone or keep that checkout as this repo's sibling directory, or set `OVERSIGHT_LADDER_LOOMGROUND_REPOS` to its path. Requires `loomground_solver` importable (loomground-escalation's one dependency).
 

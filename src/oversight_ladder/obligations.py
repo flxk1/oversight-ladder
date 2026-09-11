@@ -36,7 +36,7 @@ CERTIFICATE_FACETS: Tuple[str, ...] = (
     "considered-record",
 )
 
-# adopted (refinable): loomground names no L1/L4 meaning of its own and
+# adopted: loomground names no L1/L4 meaning of its own and
 # RVND's action_gate.py/test_autonomy_ladder_iso.py name only L0/L2/L3/L5/L6
 # (see grounding strings below) — L1 and L4's meanings are this layer's own
 # ratified-but-refinable working adoption (contract, "Ratified decisions").
@@ -47,7 +47,7 @@ _REFINABLE = frozenset({"L1", "L4"})
 class RungObligation:
     rung: str
     label: str
-    status: str                    # "adopted" | "adopted (refinable)"
+    status: str                    # "adopted"
     art14: str                     # AI Act citation this rung's measure grounds in
     summary: str
     lg_file: str
@@ -67,7 +67,7 @@ _TABLE: dict[str, RungObligation] = {
                    "approves every step)'",
     ),
     "L1": RungObligation(
-        rung="L1", label="propose/notify", status="adopted (refinable)",
+        rung="L1", label="propose/notify", status="adopted",
         art14="Art. 14(4)(a)",
         summary="After-the-fact notify obligation on every action; auto-"
                  "release restricted to reversible effects — an irreversible "
@@ -102,7 +102,7 @@ _TABLE: dict[str, RungObligation] = {
                    "sign-off)'",
     ),
     "L4": RungObligation(
-        rung="L4", label="supervised automation", status="adopted (refinable)",
+        rung="L4", label="supervised automation", status="adopted",
         art14="Art. 14(4)(b)+(e)",
         summary="Unattended action under continuous-monitoring and "
                  "intervention/stop obligations; a separate control-change "

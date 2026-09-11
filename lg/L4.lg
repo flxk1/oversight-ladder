@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# L4 supervised automation — adopted (refinable): unattended action under
+# L4 supervised automation — adopted: unattended action under
 # active monitoring with a real intervention/stop point, the working meaning
 # this layer adopts (RVND names L0/L2/L3/L5/L6, not L4). Two obligations
 # attached on egress declare the points of attachment for continuous

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# L1 propose/notify — adopted (refinable): the language declares no L1-named
+# L1 propose/notify — adopted: the language declares no L1-named
 # meaning of its own (RVND's action_gate.py names L0/L2/L3/L5/L6, not L1/L4);
 # this is the working meaning this layer adopts. Auto-releases, but carries an
 # after-the-fact notify obligation on every action (AI Act Art. 14(4)(a):

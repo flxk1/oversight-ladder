@@ -12,9 +12,9 @@ def test_rung_table_keys_match_the_ladder_exactly():
     assert set(rung_table()) == set(grade_levels())
 
 
-def test_l1_and_l4_are_marked_adopted_refinable():
-    assert obligation_for("L1").status == "adopted (refinable)"
-    assert obligation_for("L4").status == "adopted (refinable)"
+def test_l1_and_l4_are_marked_adopted():
+    assert obligation_for("L1").status == "adopted"
+    assert obligation_for("L4").status == "adopted"
 
 
 def test_other_rungs_are_plain_adopted_not_candidate():

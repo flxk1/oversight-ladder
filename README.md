@@ -20,10 +20,10 @@ human's direct decisions. They are marked accordingly, not as
 | Rung | Label | Status | Art. 14 measure | Obligation (summary) | `.lg` |
 |---|---|---|---|---|---|
 | L0 | operator-controlled | adopted | Art. 14(4)(d) | Per-step approval: every action referred to a human operator, unconditionally. | `lg/L0.lg` |
-| L1 | propose/notify | **adopted (refinable)** | Art. 14(4)(a) | After-the-fact notify on every action; auto-release restricted to reversible effects. | `lg/L1.lg` |
+| L1 | propose/notify | **adopted** | Art. 14(4)(a) | After-the-fact notify on every action; auto-release restricted to reversible effects. | `lg/L1.lg` |
 | L2 | partial | adopted | Art. 14(4)(c) | Required grade L2 on the gate (below it, withheld pending oversight); consequential-effect actions reserved to a human reviewer. | `lg/L2.lg` |
 | L3 | standby-conditional | adopted | Art. 14(4)(d)+(e) | Financial / irreversible / external-publish footprints clear only via reservation to a standby human (sign-off). | `lg/L3.lg` |
-| L4 | supervised automation | **adopted (refinable)** | Art. 14(4)(b)+(e) | Unattended, under continuous-monitoring and intervention/stop obligations; separate quorum-gated separation-of-duties on self-widening. | `lg/L4.lg` |
+| L4 | supervised automation | **adopted** | Art. 14(4)(b)+(e) | Unattended, under continuous-monitoring and intervention/stop obligations; separate quorum-gated separation-of-duties on self-widening. | `lg/L4.lg` |
 | L5 | full automation | adopted | Art. 26 | Auto-releases with ex-post audit + kill-switch obligations; every high-stakes footprint prohibited outright. | `lg/L5.lg` |
 | L6 | self-governing | adopted | — | No meaningful oversight is possible; every action prohibited, unconditionally. Never granted. | `lg/L6.lg` |
 

@@ -1,0 +1,51 @@
+# oversight-ladder
+
+> A human-oversight obligation standard keyed to loomground's ratified L0-L6 autonomy ladder: per-rung `.lg` declarations plus a Python lookup from a rung, or an escalation ceiling, to what that rung's human-facing obligation point requires.
+
+## Problem
+An autonomy grade (L0-L6) says how much a system may do unattended; it does not say what a human overseer is owed at that grade. oversight-ladder reads the ladder and the ceiling calculus from loomground read-only and adds the missing layer: one `.lg` obligation declaration per rung, and a table mapping a rung (or an escalation result) to its obligation, its AI Act Art. 14 grounding, and the oversight-certificate facets it should satisfy when exercised. It mints no ladder of its own.
+
+## Install
+This repo is not yet packaged for `pip install` — its `pyproject.toml` declares no `[build-system]`, and it resolves the ladder and the ceiling calculus by reading a sibling `loomground-repos/` checkout on disk at runtime rather than by declaring them as installable dependencies. Use it in place:
+```
+git clone https://github.com/flxk1/oversight-ladder.git
+# clone or keep loomground-repos/ (loomground-governance, loomground-escalation, loomground-ref)
+# as its sibling directory, or set OVERSIGHT_LADDER_LOOMGROUND_REPOS to its path
+```
+Import name `oversight_ladder`, importable once `src/` is on `PYTHONPATH` (see `tests/conftest.py` for the pattern). Requires `loomground_solver` importable (loomground-escalation's one dependency).
+
+## Usage
+```python
+from oversight_ladder.obligations import obligation_for, rung_table, CERTIFICATE_FACETS
+from oversight_ladder.ladder import grade_levels, ladder_info
+from oversight_ladder.escalation_bridge import resolve, resolve_with_escalation
+from oversight_ladder.validator import validate_file
+from oversight_ladder.biometric import biometric_addon_path
+
+grade_levels()                       # ('L0', ..., 'L6') — read from grades.json, never hardcoded
+ob = obligation_for("L3")
+ob.status, ob.art14, ob.summary, ob.lg_file, ob.certificate_facets
+
+# a rung by escalation ceiling rather than by name
+ob = resolve(factors, delegated="L2")            # loomground_escalation.Factor instances
+ob, escalation = resolve_with_escalation(factors, delegated="L2")
+escalation.why(), escalation.binding, escalation.unassessed
+
+# validate a rung's .lg patch against loomground's own checker
+validate_file(oversight_ladder.obligations.lg_path("L4"))   # engine="ref" (default) or "skill"
+```
+
+No CLI or MCP tool is exposed; the package is consumed as a library.
+
+## Contracts
+| Surface | Definition |
+|---|---|
+| Rung obligation table | `oversight_ladder.obligations.rung_table()`, `.obligation_for(rung)`; `RungObligation` (`rung`, `label`, `status`, `art14`, `summary`, `lg_file`, `certificate_facets`, `grounding`) |
+| Per-rung `.lg` declarations | `lg/L0.lg` … `lg/L6.lg`, one per rung; `lg/biometric-two-person.lg` (Art. 14(5) two-person add-on, outside the core ladder, no default `grade`) |
+| Ladder read | `oversight_ladder.ladder.grade_levels()`, `.grade_grounding()`, `.ladder_info()`, `.autonomy_ladder()` — read from `loomground-governance/standard/vocabulary/grades.json`, never hardcoded |
+| Escalation bridge | `oversight_ladder.escalation_bridge.resolve(factors, delegated=...)`, `.resolve_with_escalation(...)` — wraps `loomground_escalation.ceiling()` |
+| `.lg` validator | `oversight_ladder.validator.validate_text` / `.validate_file` — dual-engine (`loomground-ref`, and the loomground-governance skill's cached copy) |
+| Certificate facets cited | `CERTIFICATE_FACETS = ("human-authorship-attestation", "reasoned-rationale", "considered-record")` — RVND's `rvnd-pack/commons/commons.json`, cited by name, not recomposed |
+| Biometric add-on | `oversight_ladder.biometric.biometric_addon_path()` |
+
+Dependency direction: `oversight-ladder` -> `loomground-governance` / `loomground-escalation`, read-only, never the reverse. RVND enforces against the facets this repo names; it does not implement the gate or the certificate itself.

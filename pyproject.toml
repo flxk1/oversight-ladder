@@ -1,0 +1,8 @@
+[project]
+name = "oversight-ladder"
+version = "0.1.0"
+description = "Human-oversight obligations keyed to loomground's L0-L6 autonomy ladder."
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

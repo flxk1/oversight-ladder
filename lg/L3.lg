@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+# L3 standby-conditional — a human standby operator, not approving every step
+# (unlike L0) but on call for the specific footprints that carry financial,
+# irreversible, or external-publish consequence: each is referred to the
+# standby operator for sign-off before release (AI Act Art. 14(4)(d)+(e): the
+# ability to override/reverse and to intervene/halt). Below L3 these three
+# footprints are never auto-released at all (RVND: NO-GO below the standby
+# grade); at and above L3 they clear only through this reservation, never
+# through the grade comparison alone.
+actor agent grade L3
+human standby role standby-operator
+gate  action risk high grade L3 grant agent
+reserve agent-action by standby-operator when tags contains financial
+reserve agent-action by standby-operator when tags contains irreversible
+reserve agent-action by standby-operator when tags contains external-publish
+cord  agent  -> action
+cord  action -> master

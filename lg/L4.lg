@@ -1,0 +1,30 @@
+# SPDX-License-Identifier: Apache-2.0
+# L4 supervised automation — adopted (refinable): unattended action under
+# active monitoring with a real intervention/stop point, the working meaning
+# this layer adopts (RVND names L0/L2/L3/L5/L6, not L4). Two obligations
+# attached on egress declare the points of attachment for continuous
+# monitoring and for a stop/intervention capability (Art. 14(4)(b): awareness
+# of automation bias / continued fitness to intervene; Art. 14(4)(e): the
+# power to interrupt through a stop procedure) — discharge of either duty is
+# host, not language. `redress ... overturn` records that a released action
+# remains reversible by the supervisor after the fact.
+#
+# A second, separate gate declares separation-of-duties over the one action
+# this ladder is otherwise silent on: widening the agent's own control surface
+# (a routing/grade/approval change). Quorum requires two distinct parties, so
+# the same actor that requested a widening cannot also be the one who grants
+# it (cf. RVND oversight_compose.check_separation, enforced host-side; this
+# gate is the declarative floor it enforces against).
+actor agent grade L4
+human supervisor role supervisor
+human controller role controller
+gate  action         risk high grade L4 grant agent
+gate  control-change  risk high grant agent
+obligation continuous-monitoring        on action
+obligation intervention-stop-capability on action
+redress agent-action by supervisor overturn
+reserve control-change by supervisor and controller
+cord  agent          -> action
+cord  agent          -> control-change
+cord  action         -> master
+cord  control-change  -> master

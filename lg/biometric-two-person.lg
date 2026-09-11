@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: Apache-2.0
+# biometric-two-person — AI Act Art. 14(5): a SEPARATE, OPTIONAL add-on
+# obligation for biometric-identification deployments, outside the core L0-L6
+# ladder. It is not a grade-independent floor: nothing here declares a `grade`
+# at all, so it composes with whatever rung governs the rest of the
+# deployment (attach it alongside any Lx gate by granting the same actor over
+# a `biometric-id-decision` kind) rather than replacing that rung's own
+# obligation. Quorum with a conjunction target requires two DISTINCT parties
+# (spec §6: the quorum distinctness predicate over provenance), which is this
+# language's expression of "verified or confirmed by at least two natural
+# persons... individually".
+actor agent
+human verifier1 role biometric-verifier
+human verifier2 role biometric-verifier
+gate  biometric-id risk critical grant agent
+reserve biometric-id-decision by verifier1 and verifier2
+cord  agent        -> biometric-id
+cord  biometric-id -> master

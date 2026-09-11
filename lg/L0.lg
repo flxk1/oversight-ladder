@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+# L0 operator-controlled — every action is referred to the operator; a human
+# approves each step (AI Act Art. 14(4)(d): the operator's ability to decide,
+# in any particular situation, not to use the system or to disregard/override/
+# reverse its output). The reservation carries no guard, so it matches every
+# `agent-action` unconditionally, taking precedence over the grade comparison
+# (spec SYNTAX/SPEC.md: reserved is not auto regardless of what an actor is
+# granted). grade L0 on the gate is declared for legibility only.
+actor agent grade L0
+human operator role operator
+gate  action risk high grade L0 grant agent
+reserve agent-action by operator
+cord  agent  -> action
+cord  action -> master

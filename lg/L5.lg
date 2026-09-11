@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: Apache-2.0
+# L5 full automation — the former "silent publish": auto-releases with no
+# reservation on the general action, but carries an ex-post audit obligation
+# and a kill-switch attachment point (AI Act Art. 26, deployer obligations:
+# ex-post monitoring and the ability to suspend use), plus a contestability
+# right recorded for 30 days after release. Every high-stakes footprint RVND
+# names (personal-data, security-control, financial, irreversible,
+# external-publish) is PROHIBITED outright at L5, not merely reserved: full
+# automation never carries a high-stakes footprint, at any grade (RVND:
+# "never carries high-stakes footprints" — non-widening, the clearing set does
+# not grow past what L3/L4 already reserve).
+actor agent grade L5
+human auditor role auditor
+gate  action risk high grade L5 grant agent
+obligation ex-post-audit         on action
+obligation kill-switch-capability on action
+redress agent-action by auditor within 30d
+prohibit agent-action when tags contains personal-data
+prohibit agent-action when tags contains security-control
+prohibit agent-action when tags contains financial
+prohibit agent-action when tags contains irreversible
+prohibit agent-action when tags contains external-publish
+cord  agent  -> action
+cord  action -> master

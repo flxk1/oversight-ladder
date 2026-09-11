@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+# L6 self-governing — categorically refused. No meaningful human oversight is
+# possible at this rung (ISO/IEC 22989 §5.13's ceiling; RVND: "self-governing
+# autonomy (L6) is never permitted", the always-refused ceiling). The
+# unconditional, unguarded prohibition matches every `agent-action` and
+# `prohibited` overrides any grant (spec §6/§7.1) — there is no path by which
+# an L6-graded actor's action releases. No human role is declared: there is
+# no oversight point to refer a token to, by design.
+actor agent grade L6
+gate  action risk high grade L6 grant agent
+prohibit agent-action
+cord  agent  -> action
+cord  action -> master

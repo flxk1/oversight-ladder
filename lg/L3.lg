@@ -4,8 +4,8 @@
 # irreversible, or external-publish consequence: each is referred to the
 # standby operator for sign-off before release (AI Act Art. 14(4)(d)+(e): the
 # ability to override/reverse and to intervene/halt). Below L3 these three
-# footprints are never auto-released at all (RVND: NO-GO below the standby
-# grade); at and above L3 they clear only through this reservation, never
+# footprints are never auto-released below the standby grade; at and above L3
+# they clear only through this reservation, never
 # through the grade comparison alone.
 actor agent grade L3
 human standby role standby-operator

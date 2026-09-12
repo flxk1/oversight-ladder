@@ -1,10 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0
 # L2 partial — the required grade L2 on the source gate means an actor granted
 # below L2 gets the grade-gated `human` disposition (withheld pending
-# oversight) rather than auto; this is the loomground correlate of RVND's
-# "personal-data / security-control clear only at or above L2, else NO-GO"
-# (RVND enforces the stricter refusal on top; this layer declares the
-# withhold-pending-oversight floor, AI Act Art. 14(4)(a)/Art. 26). Independent
+# oversight) rather than auto. This layer declares a withhold-pending-
+# oversight floor for personal-data and security-control footprints (AI Act
+# Art. 14(4)(a)/Art. 26). Independent
 # of grade, any action tagged `consequential` is reserved to a human reviewer
 # before it takes effect (Art. 14(4)(c): correctly interpret the output before
 # relying on it).

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # L4 supervised automation — adopted: unattended action under
 # active monitoring with a real intervention/stop point, the working meaning
-# this layer adopts (RVND names L0/L2/L3/L5/L6, not L4). Two obligations
+# this layer adopts. Two obligations
 # attached on egress declare the points of attachment for continuous
 # monitoring and for a stop/intervention capability (Art. 14(4)(b): awareness
 # of automation bias / continued fitness to intervene; Art. 14(4)(e): the
@@ -13,8 +13,7 @@
 # this ladder is otherwise silent on: widening the agent's own control surface
 # (a routing/grade/approval change). Quorum requires two distinct parties, so
 # the same actor that requested a widening cannot also be the one who grants
-# it (cf. RVND oversight_compose.check_separation, enforced host-side; this
-# gate is the declarative floor it enforces against).
+# it. This gate is the declarative floor a host enforces against.
 actor agent grade L4
 human supervisor role supervisor
 human controller role controller

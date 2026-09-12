@@ -3,11 +3,11 @@
 # reservation on the general action, but carries an ex-post audit obligation
 # and a kill-switch attachment point (AI Act Art. 26, deployer obligations:
 # ex-post monitoring and the ability to suspend use), plus a contestability
-# right recorded for 30 days after release. Every high-stakes footprint RVND
-# names (personal-data, security-control, financial, irreversible,
+# right recorded for 30 days after release. Every high-stakes footprint named
+# here (personal-data, security-control, financial, irreversible,
 # external-publish) is PROHIBITED outright at L5, not merely reserved: full
-# automation never carries a high-stakes footprint, at any grade (RVND:
-# "never carries high-stakes footprints" — non-widening, the clearing set does
+# automation never carries a high-stakes footprint, at any grade (non-
+# widening: the clearing set does
 # not grow past what L3/L4 already reserve).
 actor agent grade L5
 human auditor role auditor

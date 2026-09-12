@@ -1,9 +1,8 @@
 # The rung table
 
-All seven rungs are adopted. L1 and L4 carry no RVND-authoritative meaning
-(RVND's `action_gate.py` names L0/L2/L3/L5/L6, not L1/L4) — their meanings
-here are this layer's own ratified working adoption, per the human's direct
-decisions. They are marked `adopted`, not `[CANDIDATE — needs ratification]`.
+All seven rung meanings are authored and adopted by this package. They are
+marked `adopted`, not `[CANDIDATE — needs ratification]`; a consuming host may
+enforce a stricter policy but is not the source of these public meanings.
 
 | Rung | Label | Status | Art. 14 measure | Obligation (summary) | `.lg` |
 |---|---|---|---|---|---|

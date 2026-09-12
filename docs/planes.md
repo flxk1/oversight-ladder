@@ -5,14 +5,11 @@
 - **loomground grounds** the requirement — the declarations in `lg/*.lg` are
   what this layer asserts a rung obliges, expressed in loomground's
   vocabulary (`reserve`, `prohibit`, `obligation`, `redress`, quorum).
-- **RVND enforces** — the actual gate (`action_gate.py`) and the oversight
-  certificate (`oversight_extractor.py` / `oversight_compose.py` /
-  `rvnd-pack/commons/commons.json`'s `meaningful-oversight` facets) are
-  RVND's, cited here by name, not reimplemented. This repo names which
-  three facets (`human-authorship-attestation`, `reasoned-rationale`,
-  `considered-record`) a rung's human-facing obligation point should
-  satisfy when exercised; whether they are in fact satisfied is RVND's
-  concern, not this repo's.
+- **the host enforces** the declarations and supplies the human workflow.
+  This package defines three evidence-interface names
+  (`human-authorship-attestation`, `reasoned-rationale`, `considered-record`)
+  for a host to collect when a human-facing obligation point is exercised.
+  It does not implement evidence collection or certificate composition.
 - **ctrl surfaces** — a plan-time need (`max(grade, ...)`) is ctrl's
   concern; nothing here plans or dispatches anything.
 
@@ -35,12 +32,6 @@ compliance is a matter of law and policy, outside this repo.
   `grades.json` says this itself: "policy supplies the levels, their
   meanings, and their order; the language owns only the comparison rule."
   Do not read "L0-L6" as *the* ISO/SAE ladder.
-- **RVND doc drift, not touched here.** RVND's `action_gate.py` still carries
-  a stale inline comment (`autonomy_grade: str = "L1"  # L0..L4`) against the
-  shipped L0-L6 ladder its own `grade_levels()` (from
-  `adapters/policy_languages.py`) actually returns. That file is outside
-  this repo's territory (`rvnd-repos/` is read-only here); it is RVND's
-  owner's to fix.
 - **A second, newly-found doc-drift: the loomground-governance skill's
   cached validator is stale.** The plugin-cached copy of the checker
   (`~/.claude/plugins/cache/loomground/loomground-governance/0.1.0/skills/
@@ -77,18 +68,13 @@ compliance is a matter of law and policy, outside this repo.
 - the grammar/checker (`loomground-ref/loomground.py`, cross-checked against
   the loomground-governance skill's cached copy) — used to validate every
   `.lg` patch; no parser of its own;
-- the RVND-authoritative rung meanings for L0/L2/L3/L5/L6
-  (`action_gate.py`, `test_autonomy_ladder_iso.py`) — cited, not
-  reimplemented;
-- the oversight-certificate facet names (`rvnd-pack/commons/commons.json`'s
-  `meaningful-oversight`) — cited by name in `obligations.CERTIFICATE_
-  FACETS`, no compose logic reimplemented.
 
 **Authored here:**
 - the per-rung `.lg` patches (`lg/*.lg`) mapping each rung to loomground
   declarations;
-- the AI Act Art. 14(4) letter mapping and the working meanings for L1/L4
-  (ratified, marked adopted);
+- all seven rung meanings and the AI Act Art. 14(4) letter mapping (ratified,
+  marked adopted);
+- the evidence-interface names in `obligations.CERTIFICATE_FACETS`;
 - `obligations.py`'s rung table, `escalation_bridge.py`'s wiring from a
   ceiling to an obligation, `biometric.py`'s add-on metadata, and
   `validator.py`'s dual-engine wrapper;

@@ -29,7 +29,7 @@ def test_l6_carries_no_certificate_facets_never_exercised():
 
 
 @pytest.mark.parametrize("rung", ["L0", "L1", "L2", "L3", "L4", "L5"])
-def test_human_facing_rungs_cite_the_rvnd_certificate_facets(rung):
+def test_human_facing_rungs_expose_the_certificate_facets(rung):
     assert obligation_for(rung).certificate_facets == CERTIFICATE_FACETS
 
 

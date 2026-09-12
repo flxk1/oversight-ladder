@@ -12,7 +12,11 @@ hides -- that the cached copy has not caught up with grades.json.
 import pytest
 
 from oversight_ladder.obligations import lg_path, rung_table
-from oversight_ladder.validator import validate_file
+from oversight_ladder.validator import _SKILL_DIR, validate_file
+
+skill_engine = pytest.mark.skipif(
+    not _SKILL_DIR.is_dir(),
+    reason=f"the skill engine is a host plugin cache, absent here: {_SKILL_DIR}")
 
 RUNGS = list(rung_table())
 
@@ -25,11 +29,13 @@ def test_rung_compiles_well_formed_ref_engine(rung):
 
 
 @pytest.mark.parametrize("rung", ["L0", "L1", "L2", "L3", "L4"])
+@skill_engine
 def test_rung_compiles_well_formed_skill_engine_where_ladder_covers_it(rung):
     result = validate_file(lg_path(rung), engine="skill")
     assert result.well_formed, result.reason
 
 
+@skill_engine
 def test_skill_engine_staleness_is_isolated_to_l5_l6():
     """The plugin-cached skill validator's bundled loomground.py still
     carries a five-rung GRADES table (L0..L4) rather than grades.json's
@@ -46,6 +52,7 @@ def test_skill_engine_staleness_is_isolated_to_l5_l6():
         assert ref_result.well_formed, ref_result.reason
 
 
+@skill_engine
 def test_biometric_addon_compiles_well_formed_both_engines():
     from oversight_ladder.biometric import biometric_addon_path
 

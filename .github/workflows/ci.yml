@@ -34,19 +34,19 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
         with:
           repository: flxk1/loomground-governance
-          ref: 270e11d0bbded46c810b2fe56559323d6dcd969a
+          ref: 82c7613e4a2247218a7281dd99933ed7c9e31218
           path: loomground-repos/loomground-governance
       - name: checkout loomground-escalation (src/, on-disk)
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
         with:
           repository: flxk1/loomground-escalation
-          ref: 82c3e05f2241383e210e5621591c9072b894232f
+          ref: e398bb900657ae210b35239f0235083b185279fb
           path: loomground-repos/loomground-escalation
       - name: checkout loomground-ref (conformance/validation engine, on-disk)
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
         with:
           repository: flxk1/loomground-ref
-          ref: adcc44a36b10913d167772bca4e7a0dea35f58a0
+          ref: 8c99f7cf93ae6b7220ada9e15a8455befae1663d
           path: loomground-repos/loomground-ref
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5
         with:
@@ -57,9 +57,9 @@ jobs:
       - name: install oversight-ladder + the transitive plane packages
         run: |
           python3 -m pip install "./oversight-ladder[dev]"
-          python3 -m pip install --no-deps "git+https://github.com/flxk1/loomground-governance.git@270e11d0bbded46c810b2fe56559323d6dcd969a"
-          python3 -m pip install --no-deps "git+https://github.com/flxk1/loomground-solver.git@5f674da3dab5a0763d4cb61bae576797ebd5f788"
-          python3 -m pip install --no-deps "git+https://github.com/flxk1/loomground-deontic.git@35f8eabdc533b275a086b20c8d7a161f4acc46a8"
+          python3 -m pip install --no-deps "git+https://github.com/flxk1/loomground-governance.git@82c7613e4a2247218a7281dd99933ed7c9e31218"
+          python3 -m pip install --no-deps "git+https://github.com/flxk1/loomground-solver.git@c6f360ba6adfd81130d984b1c5818c5d551d94b8"
+          python3 -m pip install --no-deps "git+https://github.com/flxk1/loomground-deontic.git@319e218500da42dea693830ff790343aa340bd60"
       - name: test
         working-directory: oversight-ladder
         run: python3 -m pytest -q

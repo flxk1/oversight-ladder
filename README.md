@@ -50,7 +50,7 @@ out: L2 ('data-sensitivity',)
 - `escalation_bridge`: `resolve(factors, delegated=)` ·
   `resolve_with_escalation(factors, delegated=)`
 - `validator`: `validate_text(src, engine="ref")` · `validate_file(path,
-  engine="skill")` → `ValidationResult`
+  engine="ref")` → `ValidationResult`
 - `biometric`: `biometric_addon_path()`; declarations in `lg/L0.lg` …
   `lg/L6.lg` and `lg/biometric-two-person.lg`
 - rung table, Art. 14 letters, the two-person add-on: [docs/rungs.md](docs/rungs.md)
@@ -69,6 +69,10 @@ division, caveats, and consumed versus authored:
 
 0.1.0 · 41 tests ([running them](docs/planes.md#running-the-tests)) · Python
 >=3.10 · zero declared dependencies
+
+## How this is made
+
+The code and documentation are written with Loomground agents. The maintainer reads and corrects all of it.
 
 ## License
 
